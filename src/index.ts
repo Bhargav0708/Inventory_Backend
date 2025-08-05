@@ -45,7 +45,8 @@ app.use("/pdfroute", pdfroute);
 app.use("/cart", cart);
 
 sendSalesrecord();
-const PORT = process.env.PORT || 3000;
+// const PORT = process.env.PORT || 3000;
+const PORT = 10000;
 
 const start = async () => {
   try {
