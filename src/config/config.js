@@ -23,18 +23,18 @@ module.exports = {
     dialect: process.env.DB_DIALECT,
   },
   test: {
-    username: "root",
-    password: null,
-    database: "database_test",
+    username: "postgres",
+    password: "Dev@123",
+    database: "Inventory",
     host: "127.0.0.1",
-    dialect: "mysql",
+    dialect: "postgres",
   },
 
   production: {
-    username: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    database: process.env.DB_NAME,
-    host: process.env.DB_HOST2,
-    dialect: process.env.DB_DIALECT,
+    username: "postgres",
+    password: "Dev@123",
+    database: "Inventory",
+    host: "127.0.0.1",
+    dialect: "postgres",
   },
 };
