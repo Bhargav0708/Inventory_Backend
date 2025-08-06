@@ -11,11 +11,12 @@ import {
   BeforeValidate,
   HasMany,
   ForeignKey,
+  DeletedAt,
 } from "sequelize-typescript";
 import { Product } from "./product.model";
 import { User } from "./user.model";
 
-@Table({ tableName: "Cart", timestamps: true, paranoid: true })
+@Table({ tableName: "Cart", timestamps: true })
 export class Cart extends Model<Cart> {
   @PrimaryKey
   @AutoIncrement
@@ -53,6 +54,12 @@ export class Cart extends Model<Cart> {
     field: "updatedAt",
   })
   updatedAt?: Date;
+
+  @DeletedAt
+  @Column({
+    field: "deletedAt",
+  })
+  deletedAt?: Date;
   // @HasMany(() => Product)
   // products!;:Product[]
   //   @HasMany(() => Product)

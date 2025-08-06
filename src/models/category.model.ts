@@ -10,10 +10,11 @@ import {
   AllowNull,
   BeforeValidate,
   HasMany,
+  DeletedAt,
 } from "sequelize-typescript";
 import { Product } from "./product.model";
 
-@Table({ tableName: "Categories", timestamps: true, paranoid: true })
+@Table({ tableName: "Categories", timestamps: true })
 export class Category extends Model<Category> {
   @PrimaryKey
   @AutoIncrement
@@ -42,6 +43,12 @@ export class Category extends Model<Category> {
     field: "updatedAt",
   })
   updatedAt?: Date;
+
+  @DeletedAt
+  @Column({
+    field: "deletedAt",
+  })
+  deletedAt?: Date;
   // @HasMany(() => Product)
   // products!;:Product[]
   @HasMany(() => Product)

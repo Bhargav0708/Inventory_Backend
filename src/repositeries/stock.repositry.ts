@@ -39,7 +39,6 @@ export const stockRepositry = {
       return await Stocks.findOne({
         where: {
           productid: product_id,
-          deletedAt: null,
         },
       });
     } catch (error) {
@@ -51,7 +50,6 @@ export const stockRepositry = {
       const supplier = await Product.findOne({
         where: {
           product_id: id,
-          deletedAt: null,
         },
       });
       if (supplier) {
@@ -75,7 +73,6 @@ export const stockRepositry = {
       const user = await User.findOne({
         where: {
           id: id,
-          deletedAt: null,
         },
       });
 

@@ -157,18 +157,25 @@ export const authRepository = {
       throw error;
     }
   },
-  async verifyOTP(otp2: number, email: string) {
+  async verifyOTP(userOtp: string, email: string) {
     try {
+      const otp2 = String(userOtp);
+      console.log("the otp and email is", typeof otp2, typeof email);
       let status: string;
       const currentTime = new Date();
       const twoMinutesAgo = new Date(currentTime.getTime() - 2 * 60 * 1000);
-
+      let data = {
+        email: email,
+        otp: otp2,
+      };
+      console.log("EMail is: " + email + "type is: " + typeof email);
       let otpcorrection = await OTP.findOne({
         where: {
-          email: email,
+          email,
           otp: otp2,
         },
       });
+      console.log("the otp correction is", otpcorrection);
       if (!otpcorrection) {
         // statuss: "Otp_invalid",
         status = "Otp_invalid";
@@ -185,6 +192,7 @@ export const authRepository = {
           },
         },
       });
+      console.log("the verifiy otp with time", verifyotpwithtime);
       if (!verifyotpwithtime) {
         status = "expired";
         return status;
@@ -192,6 +200,7 @@ export const authRepository = {
         return verifyotpwithtime;
       }
     } catch (error) {
+      console.log("Otp error", error);
       throw error;
     }
   },

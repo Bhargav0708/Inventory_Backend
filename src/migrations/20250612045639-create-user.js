@@ -28,9 +28,9 @@ module.exports = {
       role: {
         type: Sequelize.ENUM("customer,supplier,admin"),
       },
-      customerType: {
+      customertype: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       createdAt: {
         allowNull: false,
@@ -38,6 +38,10 @@ module.exports = {
       },
       updatedAt: {
         allowNull: false,
+        type: Sequelize.DATE,
+      },
+      deletedAt: {
+        allowNull: true,
         type: Sequelize.DATE,
       },
       // address: {

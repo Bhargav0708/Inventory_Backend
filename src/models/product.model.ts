@@ -12,6 +12,7 @@ import {
   HasMany,
   ForeignKey,
   BelongsTo,
+  DeletedAt,
 } from "sequelize-typescript";
 import { User } from "./user.model";
 import { Category } from "./category.model";
@@ -20,7 +21,7 @@ import { Stocks } from "./stock.model";
 import { Stockalerts } from "./stockalert.model";
 import { Salesorders } from "./sales_order.model";
 
-@Table({ tableName: "Products", timestamps: true, paranoid: true })
+@Table({ tableName: "Products", timestamps: true })
 export class Product extends Model<Product> {
   @PrimaryKey
   @AutoIncrement
@@ -81,6 +82,12 @@ export class Product extends Model<Product> {
     allowNull: true,
   })
   image_url!: string;
+
+  @DeletedAt
+  @Column({
+    field: "deletedAt",
+  })
+  deletedAt?: Date;
   //   @HasMany(() => Product)
   //   products!;:Product[]
   @BelongsTo(() => Category)

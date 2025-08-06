@@ -12,6 +12,7 @@ import {
   HasMany,
   ForeignKey,
   BelongsToMany,
+  DeletedAt,
 } from "sequelize-typescript";
 import { Product } from "./product.model";
 import { Addresses } from "./address.model";
@@ -21,7 +22,7 @@ import { Roles } from "./role.model";
 import { userRole } from "./userRole.model";
 import { Salesorders } from "./sales_order.model";
 
-@Table({ tableName: "Users", timestamps: true, paranoid: true })
+@Table({ tableName: "Users", timestamps: true })
 export class User extends Model<User> {
   @PrimaryKey
   @AutoIncrement
@@ -82,8 +83,14 @@ export class User extends Model<User> {
     type: DataType.INTEGER,
   })
   addressid!: number;
+
+  @DeletedAt
+  @Column({
+    field: "deletedAt",
+  })
+  deletedAt?: Date;
   // @BeforeValidate
-  // static validateCustomerType(instance: User) {
+  // static validatecustomertype(instance: User) {
   //   if (instance.role === "customer") {
   //     if (!instance.customertype || instance.customertype.trim() === "") {
   //       throw new Error("Customer type is required when role is customer");

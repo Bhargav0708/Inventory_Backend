@@ -13,13 +13,14 @@ import {
   ForeignKey,
   BelongsTo,
   BelongsToMany,
+  DeletedAt,
 } from "sequelize-typescript";
 import { Permission } from "./permission.model";
 import { RolePermisson } from "./rolepermission.model";
 import { User } from "./user.model";
 import { userRole } from "./userRole.model";
 
-@Table({ tableName: "Roles", timestamps: true, paranoid: true })
+@Table({ tableName: "Roles", timestamps: true })
 export class Roles extends Model<Roles> {
   @PrimaryKey
   @AutoIncrement
@@ -42,6 +43,11 @@ export class Roles extends Model<Roles> {
   })
   updatedAt?: Date;
 
+  @DeletedAt
+  @Column({
+    field: "deletedAt",
+  })
+  deletedAt?: Date;
   @BelongsToMany(() => User, () => userRole)
   Users!: User[];
   @BelongsToMany(() => Permission, () => RolePermisson)

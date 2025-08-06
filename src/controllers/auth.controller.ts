@@ -2,6 +2,9 @@ import { Request, Response } from "express";
 import { authService } from "../services/auth.services";
 import { verify } from "crypto";
 import { customError } from "../helpers/customError";
+import { OTP } from "../models/otp.model";
+import { where } from "sequelize";
+import { User } from "../models/user.model";
 // import { joi } from "joi";
 export const authController = {
   async Permission(req: Request, res: Response) {
@@ -252,6 +255,16 @@ export const authController = {
         }
       }
     }
+  },
+  async getotp(req: Request, res: Response) {
+    console.log("otp is:", OTP);
+    const otp = await OTP.findOne({
+      where: {
+        id: 1,
+      },
+    });
+    console.log("the otp result", otp);
+    res.json({ data: otp });
   },
 };
 // {

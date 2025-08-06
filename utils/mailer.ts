@@ -13,7 +13,7 @@ const transporter = nodemailer.createTransport({
 export async function mailsend(
   toMail: string,
   subject: string,
-  text: number,
+  text: string,
   message: string
 ) {
   await transporter.sendMail({

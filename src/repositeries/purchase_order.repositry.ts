@@ -81,9 +81,7 @@ export const Purchase_orderRepositry = {
     // const productid = id;
     const existt = await Purchaseorders.findAll({
       where: {
-        deletedAt: {
-          [Op.not]: null,
-        },
+        purchase_order_id: purchase_order_id,
       },
     });
     console.log("the exist", existt);
@@ -138,7 +136,7 @@ export const Purchase_orderRepositry = {
   },
   async CheckExistance(id: number) {
     const existance = await Purchaseorders.findAll({
-      where: { deletedAt: null },
+      // where: { deletedAt: null },
     });
     return existance;
   },

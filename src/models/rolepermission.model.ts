@@ -12,11 +12,12 @@ import {
   HasMany,
   ForeignKey,
   BelongsTo,
+  DeletedAt,
 } from "sequelize-typescript";
 import { Roles } from "./role.model";
 import { Permission } from "./permission.model";
 
-@Table({ tableName: "RolePermisson", timestamps: true, paranoid: true })
+@Table({ tableName: "RolePermisson", timestamps: true })
 export class RolePermisson extends Model<RolePermisson> {
   @PrimaryKey
   @AutoIncrement
@@ -46,6 +47,11 @@ export class RolePermisson extends Model<RolePermisson> {
   })
   updatedAt?: Date;
 
+  @DeletedAt
+  @Column({
+    field: "deletedAt",
+  })
+  deletedAt?: Date;
   //   @HasMany(() => Product)
   //   products!;:Product[]
 }

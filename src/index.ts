@@ -45,6 +45,7 @@ app.use("/cart", cart);
 sendSalesrecord();
 
 const PORT = process.env.PORT || 3000;
+console.log("port is:", PORT);
 
 const start = async () => {
   try {

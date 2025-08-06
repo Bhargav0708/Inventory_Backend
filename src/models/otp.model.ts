@@ -9,9 +9,10 @@ import {
   UpdatedAt,
   AllowNull,
   BeforeValidate,
+  DeletedAt,
 } from "sequelize-typescript";
 
-@Table({ tableName: "Otps", timestamps: true, paranoid: true })
+@Table({ tableName: "Otps", timestamps: true })
 export class OTP extends Model<OTP> {
   @PrimaryKey
   @AutoIncrement
@@ -19,10 +20,10 @@ export class OTP extends Model<OTP> {
   id!: number;
 
   @Column({
-    type: DataType.BIGINT,
+    type: DataType.STRING,
     allowNull: false,
   })
-  otp!: number;
+  otp!: string;
   @Column({
     type: DataType.STRING,
     allowNull: false,
@@ -40,4 +41,9 @@ export class OTP extends Model<OTP> {
     field: "updatedAt",
   })
   updatedAt?: Date;
+  @DeletedAt
+  @Column({
+    field: "deletedAt",
+  })
+  deletedAt?: Date;
 }

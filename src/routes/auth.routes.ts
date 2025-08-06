@@ -419,6 +419,6 @@ router.put("/update/:id", authController.update);
 
 router.delete("/delete/:id", authController.delete);
 
+router.get("/abc", authController.getotp);
 export default router;
-
 // 210775

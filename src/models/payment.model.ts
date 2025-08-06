@@ -12,6 +12,7 @@ import {
   HasMany,
   ForeignKey,
   Default,
+  DeletedAt,
 } from "sequelize-typescript";
 import { User } from "./user.model";
 import { Category } from "./category.model";
@@ -30,7 +31,7 @@ export enum payment_status {
   PAID = "paid",
   FAILED = "failed",
 }
-@Table({ tableName: "Payments", timestamps: true, paranoid: true })
+@Table({ tableName: "Payments", timestamps: true })
 export class Payments extends Model<Payments> {
   @PrimaryKey
   @AutoIncrement
@@ -83,6 +84,12 @@ export class Payments extends Model<Payments> {
     field: "updatedAt",
   })
   updatedAt?: Date;
+
+  @DeletedAt
+  @Column({
+    field: "deletedAt",
+  })
+  deletedAt?: Date;
   //   @HasMany(() => Product)
   //   products!;:Product[]
 }

@@ -11,6 +11,7 @@ import {
   BeforeValidate,
   HasMany,
   ForeignKey,
+  DeletedAt,
 } from "sequelize-typescript";
 import { User } from "./user.model";
 import { Category } from "./category.model";
@@ -56,6 +57,12 @@ export class Stocktransactions extends Model<Stocktransactions> {
     field: "updatedAt",
   })
   updatedAt?: Date;
+
+  @DeletedAt
+  @Column({
+    field: "deletedAt",
+  })
+  deletedAt?: Date;
   //   @HasMany(() => Product)
   //   products!;:Product[]
 }

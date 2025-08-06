@@ -31,6 +31,7 @@ export const signupvalidation = {
   },
   async OTP(req: Request, res: Response, next: NextFunction) {
     try {
+      console.log("working....");
       const { error, value } = OTPSchema.validate(req.body);
       if (error) {
         // throw new customError(
@@ -44,7 +45,9 @@ export const signupvalidation = {
       } else {
         next();
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log("error is:", error);
+    }
   },
   async login(req: Request, res: Response, next: NextFunction) {
     try {

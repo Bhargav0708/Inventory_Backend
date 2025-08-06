@@ -62,6 +62,7 @@ export async function verifyToken(token: string) {
     const decoded = jwt.verify(token, "Bhargav@12345");
     return decoded;
   } catch (error) {
+    console.log("the error is of verify token", error);
     if (error instanceof customError) {
       throw error;
     } else if (error instanceof TokenExpiredError) {

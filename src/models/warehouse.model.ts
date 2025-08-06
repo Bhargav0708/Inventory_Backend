@@ -11,12 +11,13 @@ import {
   BeforeValidate,
   HasMany,
   HasOne,
+  DeletedAt,
 } from "sequelize-typescript";
 import { Stocks } from "./stock.model";
 import { Stockalerts } from "./stockalert.model";
 import { Warehouseaddresses } from "./warehouseaddress.model";
 
-@Table({ tableName: "Warehouses", timestamps: true, paranoid: true })
+@Table({ tableName: "Warehouses", timestamps: true })
 export class Warehouse extends Model<Warehouse> {
   @PrimaryKey
   @AutoIncrement
@@ -49,6 +50,11 @@ export class Warehouse extends Model<Warehouse> {
   @Column({
     field: "updatedAt",
   })
+  @DeletedAt
+  @Column({
+    field: "deletedAt",
+  })
+  deletedAt?: Date;
   updatedAt?: Date;
   @HasMany(() => Stocks)
   stocks!: Stocks[];

@@ -11,7 +11,7 @@ import { userRole } from "../models/userRole.model";
 import redis from "../../utils/redis";
 interface verification {
   email: string;
-  otp: number;
+  otp: string;
   token: string;
 }
 interface userUpdation {
@@ -87,7 +87,9 @@ export const authService = {
         role: data.role,
         customertype: data.customertype,
       };
-      const OTP = Math.floor((999999 - 100000) * Math.random() + 100000);
+      const OTP = String(
+        Math.floor((999999 - 100000) * Math.random() + 100000)
+      );
 
       const otpdata = {
         otp: OTP,
@@ -106,6 +108,7 @@ export const authService = {
 
       return token;
     } catch (error) {
+      console.log("eroor is:", error);
       if (error instanceof customError) {
         throw error;
       }
@@ -118,10 +121,7 @@ export const authService = {
       const otp2 = data.otp;
       const email = data.email;
       const token = data.token;
-      const verify = await authRepository.verifyOTP(
-        otp2 as number,
-        email as string
-      );
+      const verify = await authRepository.verifyOTP(otp2, email);
       if (verify == "Otp_invalid") {
         throw new customError("OTP_INVALID", "The Otp Is Invalid ");
       } else if (verify == "expired") {
@@ -150,6 +150,7 @@ export const authService = {
         return datatotable;
       }
     } catch (error) {
+      console.log("otp", error);
       if (error instanceof customError) {
         throw error;
       }
@@ -237,15 +238,17 @@ export const authService = {
   },
   async regenerateOtp(email: string) {
     try {
+      console.log("this is a email for regenrated", email);
       const user = await authRepository.getUserinRegenreate(email);
       if (!user) {
+        console.log("error");
         throw new customError("USER_NOT_FOUND", "User does not exist.");
       }
 
-      const newOtp = Math.floor(100000 + Math.random() * 900000);
+      const newOtp = String(Math.floor(100000 + Math.random() * 900000));
       const otpPayload = {
         email,
-        otp: newOtp,
+        otp: String(newOtp),
       };
 
       const result = await authRepository.storeOtp(otpPayload as OTP);
@@ -258,6 +261,7 @@ export const authService = {
       );
       return result;
     } catch (error) {
+      console.log("we are on regernrate otp");
       if (error instanceof customError) {
         throw error;
       }
