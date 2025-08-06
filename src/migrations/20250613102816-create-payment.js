@@ -16,13 +16,13 @@ module.exports = {
           key: "id",
         },
       },
-      order_id: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: "Purchaseorders",
-          key: "purchase_order_id",
-        },
-      },
+      // order_id: {
+      //   type: Sequelize.INTEGER,
+      //   references: {
+      //     model: "Purchaseorders",
+      //     key: "purchase_order_id",
+      //   },
+      // },
       amount: {
         type: Sequelize.INTEGER,
       },

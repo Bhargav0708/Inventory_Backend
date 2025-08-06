@@ -1,15 +1,15 @@
 "use strict";
 
-const { DataType } = require("sequelize-typescript");
-
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    queryInterface.addColumn("Products", "imgae_url", {
-      type: DataType.STRING,
-      allowNull: true,
+    await queryInterface.addColumn("Payments", "order_id", {
+      type: Sequelize.INTEGER,
+      references: {
+        model: "Purchaseorders",
+        key: "purchase_order_id",
+      },
     });
-    // queryInterface.removeColumn("Products", "imgae_url");
     /**
      * Add altering commands here.
      *
@@ -19,7 +19,7 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    queryInterface.removeColumn("Products", "imgae_url");
+    await queryInterface.removeColumn("Payments", "order_id");
     /**
      * Add reverting commands here.
      *

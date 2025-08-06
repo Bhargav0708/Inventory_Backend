@@ -106,7 +106,12 @@ export const authController = {
     try {
       const user = await authService.login(req.body);
 
-      res.cookie("login_token", user);
+      // res.cookie("login_token", user);
+      res.cookie("login_token", user, {
+        httpOnly: true,
+        sameSite: "none",
+        secure: true,
+      });
       res.status(201).json({
         data: user,
         msg: "Login Successfully",
