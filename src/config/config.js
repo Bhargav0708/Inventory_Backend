@@ -31,10 +31,13 @@ module.exports = {
   },
 
   production: {
-    username: "postgres",
-    password: "Dev@123",
-    database: "Inventory",
-    host: "127.0.0.1",
+    use_env_variable: "DB_URL",
     dialect: "postgres",
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
+    },
   },
 };

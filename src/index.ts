@@ -18,8 +18,6 @@ import { swaggerSpec, swaggerUi } from "./swagger";
 import cors from "cors";
 import cart from "./routes/cart.routes";
 
-// import userRoutes from "./routes/user.routes";
-
 const app = express();
 app.use(
   cors({
@@ -45,17 +43,16 @@ app.use("/pdfroute", pdfroute);
 app.use("/cart", cart);
 
 sendSalesrecord();
-// const PORT = process.env.PORT || 3000;
-const PORT = 10000;
+
+const PORT = process.env.PORT || 3000;
 
 const start = async () => {
   try {
     await sequelize.authenticate();
-    await sequelize.sync({ alter: true });
     console.log("✅ Database connected");
 
-    app.listen(PORT, "0.0.0.0", () => {
-      console.log(`🚀 Server running on http://localhost:${PORT}`);
+    app.listen(PORT, () => {
+      console.log(`🚀 Server running on ${PORT}`);
     });
   } catch (err) {
     console.error("❌ Failed to start app:", err);
