@@ -129,6 +129,7 @@ export const authRepository = {
     };
     const user_create = await User.create(datatobesent as User);
     // cons;
+    console.log("the user created", user_create);
     if (user_create) {
       const user_role = await Roles.findAll({
         where: {
@@ -143,6 +144,7 @@ export const authRepository = {
           roleid: role.dataValues.roleid,
         };
         let resultcount = await userRole.create(resultobj as userRole);
+        console.log("the result count", resultcount);
         if (resultcount) {
           count++;
         }

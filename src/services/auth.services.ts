@@ -175,6 +175,7 @@ export const authService = {
     } else {
       Role_match = role == Rolechecking;
     }
+    console.log("Role Matching", Role_match);
     if (!Role_match) {
       throw new customError(
         "ROLE_MISMATCHING",
