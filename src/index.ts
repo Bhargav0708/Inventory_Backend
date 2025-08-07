@@ -20,7 +20,8 @@ import cart from "./routes/cart.routes";
 import { callbackPromise } from "nodemailer/lib/shared";
 
 const app = express();
-//
+//ggd
+//ggd
 app.use(
   cors({
     origin: process.env.FRONTEND_URL,
