@@ -10,7 +10,12 @@ export const AddressRepositry = {
   },
   async getAll() {
     try {
-      return await Addresses.findAll();
+      const Address = await Addresses.findAll();
+      if (Address) {
+        return Address;
+      } else {
+        return null;
+      }
     } catch (error) {
       throw error;
     }

@@ -11,7 +11,11 @@ export const AddressController = {
   },
   async getAll(req: Request, res: Response) {
     const alladdress = await AddresService.getAll();
-    res.status(200).json({ data: alladdress });
+    if (alladdress) {
+      res.status(200).json({ data: alladdress });
+    } else {
+      res.status(200).json({ data: null, msg: "Address Not Found" });
+    }
   },
   async update(req: Request, res: Response) {
     try {

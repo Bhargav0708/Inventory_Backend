@@ -16,7 +16,11 @@ export const productController = {
   async getAll(req: Request, res: Response) {
     try {
       const allusers = await productService.getAll();
-      res.status(200).json({ data: allusers });
+      if (allusers) {
+        res.status(200).json({ data: allusers });
+      } else {
+        res.status(200).json({ data: null, msg: "Product data is null" });
+      }
     } catch (error) {
       if (error instanceof customError) {
         if (error.errorKey == "TOKEN_EXPIRED") {
@@ -133,7 +137,11 @@ export const productController = {
         pid
       );
 
-      res.status(200).json({ data: FetchSupplierInfo });
+      if (FetchSupplierInfo) {
+        res.status(200).json({ data: FetchSupplierInfo });
+      } else {
+        res.status(200).json({ data: null, msg: "Supplier Data is null" });
+      }
     } catch (error) {
       throw error;
     }

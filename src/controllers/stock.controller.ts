@@ -11,8 +11,16 @@ export const stockController = {
     });
   },
   async getAll(req: Request, res: Response) {
-    const allstocks = await stockService.getAll();
-    res.status(200).json({ data: allstocks });
+    try {
+      const allstocks = await stockService.getAll();
+      if (allstocks) {
+        res.status(200).json({ data: allstocks });
+      } else {
+        res.status(200).json({ data: null, msg: "Stock Data Not Found " });
+      }
+    } catch (error) {
+      throw error;
+    }
   },
   async update(req: Request, res: Response) {
     try {

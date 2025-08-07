@@ -1,3 +1,4 @@
+import e from "express";
 import { paginationData } from "../controllers/purchase_order.controller";
 import { customError } from "../helpers/customError";
 import { Product } from "../models/product.model";
@@ -10,7 +11,7 @@ export const productRespositry = {
   },
   async getAll() {
     // return await Product.findAll();
-    return await Product.findAll({
+    const product_list = await Product.findAll({
       // where: {
       //   price: {
       //     [Op.between]: [50000, 100000],
@@ -20,6 +21,11 @@ export const productRespositry = {
       offset: 0,
       order: [["price", "ASC"]],
     });
+    if (product_list) {
+      return product_list;
+    } else {
+      return null;
+    }
   },
 
   async update(data: Product, id: number) {
@@ -52,7 +58,11 @@ export const productRespositry = {
         product_id: id,
       },
     });
-    return findAllProductbySupplierID;
+    if (findAllProductbySupplierID) {
+      return findAllProductbySupplierID;
+    } else {
+      return null;
+    }
   },
   // async searchByNameAndPrice(data: any) {
   //   const name = data.nameSearch;
