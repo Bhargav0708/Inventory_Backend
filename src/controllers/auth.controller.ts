@@ -28,7 +28,7 @@ export const authController = {
   async create(req: Request, res: Response) {
     try {
       const usertoken = await authService.create(req.body);
-
+      console.log("in the Services");
       res.status(201).json({ token: usertoken });
     } catch (error) {
       if (error instanceof customError) {
