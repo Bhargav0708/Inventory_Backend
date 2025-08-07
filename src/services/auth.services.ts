@@ -153,6 +153,8 @@ export const authService = {
       console.log("otp", error);
       if (error instanceof customError) {
         throw error;
+      } else {
+        throw error;
       }
     }
   },

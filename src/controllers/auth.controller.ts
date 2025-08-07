@@ -69,10 +69,15 @@ export const authController = {
   async verify(req: Request, res: Response) {
     try {
       const verifiedotp = await authService.verifyOTP(req.body);
-      if (verifiedotp!) {
+      console.log("the verified otp", verifiedotp);
+      if (verifiedotp) {
         res.status(200).json({
           data: null,
           msg: "Your Otp has been verifried",
+        });
+      } else {
+        res.status(200).json({
+          msg: "Your Otp is not verified ",
         });
       }
     } catch (error) {
@@ -102,6 +107,10 @@ export const authController = {
             error: error.errorMessage,
           });
         }
+      } else {
+        res.status(400).json({
+          msg: "Somethig went wrong",
+        });
       }
     }
   },

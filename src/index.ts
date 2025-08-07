@@ -17,15 +17,34 @@ import { sendSalesrecord } from "../utils/cron";
 import { swaggerSpec, swaggerUi } from "./swagger";
 import cors from "cors";
 import cart from "./routes/cart.routes";
+import { callbackPromise } from "nodemailer/lib/shared";
 
 const app = express();
+
+// const allowedOrigins = [process.env.FRONTEND_URL, " http://localhost:5173"];
 app.use(
   cors({
     origin: process.env.FRONTEND_URL,
+    // origin: "http://localhost:5173",
     // methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true,
   })
 );
+
+// app.use(
+//   cors({
+//     origin: function (origin, callback) {
+//       console.log("the origin is", origin);
+//       if (!origin) return callback(null, true);
+//       if (allowedOrigins.includes(origin)) {
+//         return callback(null, true);
+//       } else {
+//         return callback(new Error("Origin not allowed by cors"));
+//       }
+//     },
+//     credentials: true,
+//   })
+// );
 
 app.use(express.json());
 app.use(cookieParser());
