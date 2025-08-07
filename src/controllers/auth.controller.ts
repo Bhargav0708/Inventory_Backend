@@ -31,6 +31,7 @@ export const authController = {
       console.log("in the Services");
       res.status(201).json({ token: usertoken });
     } catch (error) {
+      console.log("error",error);
       if (error instanceof customError) {
         if (error.errorKey == "INVALID_EMAIL") {
           res.status(400).json({
@@ -64,7 +65,13 @@ export const authController = {
           });
         }
       }
+      
+      else{
+          res.status(400).json({
+            msg:"Internal Server error"
+      })
     }
+  }
   },
   async verify(req: Request, res: Response) {
     try {
